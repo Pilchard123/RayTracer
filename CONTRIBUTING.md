@@ -1,0 +1,3 @@
+I'm making this to learn about ray tracing, so I probably won't be accepting PR's from anyone for now. It's not that I don't/won't appreciate it if someone wants to help - in fact quite the opposite - but if I just take code from other people then I won't learn as well as I could. Issues will be gratefully received; I am after all a noob in this area and I'm sure I'll make many, many mistakes along the way.
+
+If you want to contribute in a bigger way to a graphics project, then [Blender](https://www.blender.org/get-involved/) or [LuxCore/LuxRender](https://forums.luxcorerender.org/viewtopic.php?f=5&t=22) are two projects among many that I know would be grateful for your help.
