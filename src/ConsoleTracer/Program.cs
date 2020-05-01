@@ -12,11 +12,7 @@ namespace ConsoleTracer
         static async Task Main(string[] _)
         {
             var film = new Film(img_height, img_width, 1);
-
-            var origin = new Vector3(0, 0, 0);
-            var horizontal = new Vector3(4, 0, 0);
-            var vertical = new Vector3(0, 2, 0);
-            var lowerLeftCorner = new Vector3(-2, -1, -1);
+            var cam = new Camera();
             var world = new HittableList(new[]{
                 new Sphere(new Vector3(0,0,-1), 0.5),
                 new Sphere(new Vector3(0,-100.5,-1), 100),
@@ -24,13 +20,13 @@ namespace ConsoleTracer
 
             for (var j = 0; j < img_height; j++)
             {
-                Console.WriteLine($"Scanlines remaining: {j.ToString()}");
+                Console.WriteLine($"Scanlines remaining: {(img_height - j).ToString()}");
                 for (var i = 0; i < img_width; i++)
                 {
                     var u = ((double)i) / img_width;
                     var v = ((double)j) / img_height;
 
-                    var ray = new Ray(origin, lowerLeftCorner + (u * horizontal) + (v * vertical));
+                    var ray = cam.GetRay(u, v);
                     film.AddSample(i, j, RayColor(ray, world).AsColour());
                 }
             }
