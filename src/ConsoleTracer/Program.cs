@@ -24,6 +24,10 @@ namespace ConsoleTracer
             var horizontal = new Vector3(4, 0, 0);
             var vertical = new Vector3(0, 2, 0);
             var lowerLeftCorner = new Vector3(-2, -1, -1);
+            var world = new HittableList(new[]{
+                new Sphere(new Vector3(0,0,-1), 0.5),
+                new Sphere(new Vector3(0,-100.5,-1), 100),
+            });
 
             for (var j = img_height - 1; j >= 0; --j)
             {
@@ -32,37 +36,28 @@ namespace ConsoleTracer
                 {
                     var u = ((double)i) / img_width;
                     var v = ((double)j) / img_height;
-
+                    if (u == 0.5 && v == 0.5)
+                    {
+                        var blah = 1;
+                    }
                     var ray = new Ray(origin, lowerLeftCorner + (u * horizontal) + (v * vertical));
-                    var col = RayColor(ray).AsColour();
+                    var col = RayColor(ray, world).AsColour();
                     sw.WriteLine($"{col.R} {col.G} {col.B}");
                 }
             }
             Console.WriteLine("Done");
         }
 
-        private static Vector3 RayColor(in Ray r)
+        private static Vector3 RayColor(in Ray r, HittableList world)
         {
-            var t = HitSphere(new Vector3(0, 0, -1), 0.5, r);
-            if (t > 0)
+            if (world.Hit(r, 0, double.MaxValue, out var hitRecord))
             {
-                var surfaceNormal = (r.PointAtParameter(t) - new Vector3(0, 0, -1)).Normalize();
-                return 0.5 * new Vector3(surfaceNormal.X + 1, surfaceNormal.Y + 1, surfaceNormal.Z + 1);
+                return 0.5 * (hitRecord.Normal + new Vector3(1, 1, 1));
             }
 
             var unitDirection = r.Direction.Normalize();
             var mappedY = 0.5 * (unitDirection.Y + 1.0);
             return ((1.0 - mappedY) * new Vector3(1, 1, 1)) + (mappedY * new Vector3(0.5, 0.7, 1));
-        }
-
-        private static double HitSphere(in Vector3 center, double radius, in Ray r)
-        {
-            var oc = r.Origin - center;
-            var a = r.Direction.LengthSquared;
-            var half_b = oc.Dot(r.Direction);
-            var c = oc.LengthSquared - (radius * radius);
-            var discriminant = (half_b * half_b) - (a * c);
-            return discriminant < 0 ? -1 : ((-half_b - Math.Sqrt(discriminant)) / a);
         }
     }
 }
