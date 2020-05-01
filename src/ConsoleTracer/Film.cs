@@ -41,9 +41,9 @@ namespace ConsoleTracer
             {
                 foreach (var pixel in row)
                 {
-                    var scaledPixel = pixel / SamplesPerPixel;
+                    var scaledPixel = (pixel / SamplesPerPixel).AsColour();
 
-                    await sw.WriteLineAsync($"{scaledPixel.R} {scaledPixel.G} {scaledPixel.B}");
+                    await sw.WriteLineAsync($"{scaledPixel.X} {scaledPixel.Y} {scaledPixel.Z}");
                 }
             }
         }

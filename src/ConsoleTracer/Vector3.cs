@@ -8,10 +8,6 @@ namespace ConsoleTracer
         public double Y { get; }
         public double Z { get; }
 
-        public double R => X;
-        public double G => Y;
-        public double B => Z;
-
         public Vector3(double x, double y, double z)
         {
             X = x;

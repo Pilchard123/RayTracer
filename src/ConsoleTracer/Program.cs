@@ -6,13 +6,15 @@ namespace ConsoleTracer
     class Program
     {
 
-        const int img_width = 200;
-        const int img_height = 100;
+        const int img_width = 400;
+        const int img_height = 200;
+        const int spp = 5;
 
         static async Task Main(string[] _)
         {
-            var film = new Film(img_height, img_width, 1);
+            var film = new Film(img_height, img_width, spp);
             var cam = new Camera();
+            var rng = new Random();
             var world = new HittableList(new[]{
                 new Sphere(new Vector3(0,0,-1), 0.5),
                 new Sphere(new Vector3(0,-100.5,-1), 100),
@@ -23,11 +25,14 @@ namespace ConsoleTracer
                 Console.WriteLine($"Scanlines remaining: {(img_height - j).ToString()}");
                 for (var i = 0; i < img_width; i++)
                 {
-                    var u = ((double)i) / img_width;
-                    var v = ((double)j) / img_height;
+                    for (var s = 0; s < spp; s++)
+                    {
+                        var u = (i + rng.NextDouble()) / img_width;
+                        var v = (j + rng.NextDouble()) / img_height;
 
-                    var ray = cam.GetRay(u, v);
-                    film.AddSample(i, j, RayColor(ray, world).AsColour());
+                        var ray = cam.GetRay(u, v);
+                        film.AddSample(i, j, RayColor(ray, world));
+                    }
                 }
             }
             Console.WriteLine("Writing film");
