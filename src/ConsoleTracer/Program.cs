@@ -58,11 +58,11 @@ namespace ConsoleTracer
         private static double HitSphere(in Vector3 center, double radius, in Ray r)
         {
             var oc = r.Origin - center;
-            var a = r.Direction.Dot(r.Direction);
-            var b = 2 * oc.Dot(r.Direction);
-            var c = oc.Dot(oc) - (radius * radius);
-            var discriminant = (b * b) - (4 * a * c);
-            return discriminant < 0 ? -1 : ((-b - Math.Sqrt(discriminant)) / (2.0 * a));
+            var a = r.Direction.LengthSquared;
+            var half_b = oc.Dot(r.Direction);
+            var c = oc.LengthSquared - (radius * radius);
+            var discriminant = (half_b * half_b) - (a * c);
+            return discriminant < 0 ? -1 : ((-half_b - Math.Sqrt(discriminant)) / a);
         }
     }
 }
