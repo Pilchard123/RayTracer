@@ -36,10 +36,7 @@ namespace ConsoleTracer
                 {
                     var u = ((double)i) / img_width;
                     var v = ((double)j) / img_height;
-                    if (u == 0.5 && v == 0.5)
-                    {
-                        var blah = 1;
-                    }
+
                     var ray = new Ray(origin, lowerLeftCorner + (u * horizontal) + (v * vertical));
                     var col = RayColor(ray, world).AsColour();
                     sw.WriteLine($"{col.R} {col.G} {col.B}");
