@@ -31,14 +31,7 @@ namespace ConsoleTracer
                     var v = ((double)j) / img_height;
 
                     var ray = new Ray(origin, lowerLeftCorner + (u * horizontal) + (v * vertical));
-                    try
-                    {
-                        film.AddSample(i, j, RayColor(ray, world).AsColour());
-                    }
-                    catch
-                    {
-                        var a = 1;
-                    }
+                    film.AddSample(i, j, RayColor(ray, world).AsColour());
                 }
             }
             Console.WriteLine("Writing film");
