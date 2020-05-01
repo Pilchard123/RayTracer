@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using System.Threading.Tasks;
 
 namespace ConsoleTracer
 {
@@ -9,16 +9,9 @@ namespace ConsoleTracer
         const int img_width = 200;
         const int img_height = 100;
 
-        static void Main(string[] _)
+        static async Task Main(string[] _)
         {
-            var filename = $@"C:\ExperimentalProjects\FileDrops\RaytracerOutput\img_{DateTime.UtcNow.Ticks}.ppm";
-            using var fs = new FileStream(filename, FileMode.CreateNew);
-            using var sw = new StreamWriter(fs);
-
-            sw.WriteLine("P3");
-            sw.WriteLine(img_width);
-            sw.WriteLine(img_height);
-            sw.WriteLine("255");
+            var film = new Film(img_height, img_width, 1);
 
             var origin = new Vector3(0, 0, 0);
             var horizontal = new Vector3(4, 0, 0);
@@ -29,19 +22,27 @@ namespace ConsoleTracer
                 new Sphere(new Vector3(0,-100.5,-1), 100),
             });
 
-            for (var j = img_height - 1; j >= 0; --j)
+            for (var j = 0; j < img_height; j++)
             {
                 Console.WriteLine($"Scanlines remaining: {j.ToString()}");
-                for (var i = 0; i < img_width; ++i)
+                for (var i = 0; i < img_width; i++)
                 {
                     var u = ((double)i) / img_width;
                     var v = ((double)j) / img_height;
 
                     var ray = new Ray(origin, lowerLeftCorner + (u * horizontal) + (v * vertical));
-                    var col = RayColor(ray, world).AsColour();
-                    sw.WriteLine($"{col.R} {col.G} {col.B}");
+                    try
+                    {
+                        film.AddSample(i, j, RayColor(ray, world).AsColour());
+                    }
+                    catch
+                    {
+                        var a = 1;
+                    }
                 }
             }
+            Console.WriteLine("Writing film");
+            await film.WriteToFile($@"C:\ExperimentalProjects\FileDrops\RaytracerOutput\img_{DateTime.UtcNow.Ticks}.ppm");
             Console.WriteLine("Done");
         }
 

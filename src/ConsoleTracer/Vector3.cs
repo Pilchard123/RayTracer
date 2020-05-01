@@ -39,9 +39,9 @@ namespace ConsoleTracer
 
         public Vector3 Normalize() => this / Length;
         public Vector3 AsColour() => new Vector3(
-            (int)(256 * Math.Clamp(X, 0, 1 - 0.999)),
-            (int)(256 * Math.Clamp(X, 0, 1 - 0.999)),
-            (int)(256 * Math.Clamp(X, 0, 1 - 0.999))
+            (int)(255.999 * X),
+            (int)(255.999 * Y),
+            (int)(255.999 * Z)
         );
     }
 }
