@@ -18,7 +18,7 @@ namespace ConsoleTracer
             var world = new HittableList(new[]{
                 new Sphere(new Vector3(0,0,-1), 0.5, new Lambertian(new Vector3(0.7,0.3,0.3))),
                 new Sphere(new Vector3(0,-100.5,-1), 100, new Lambertian(new Vector3(0.8, 0.8, 0))),
-                new Sphere(new Vector3(1,0,-1), 0.5, new Metal(new Vector3(0.8, 0.6, 0.2))),
+                new Sphere(new Vector3(1,0,-1), 0.5, new Metal(new Vector3(0.8, 0.6, 0.2), 1)),
                 new Sphere(new Vector3(-1,0,-1), 0.5, new Metal(new Vector3(0.8, 0.8, 0.8))),
             });
 
