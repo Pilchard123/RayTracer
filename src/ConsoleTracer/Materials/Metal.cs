@@ -13,7 +13,6 @@ namespace ConsoleTracer.Materials
         }
         public Metal(in Vector3 albedo) : this(albedo, 0) { }
 
-        private static Vector3 Reflect(in Vector3 inVector, in Vector3 normal) => inVector - (2 * inVector.Dot(normal) * normal);
         public override bool Scatter(in Ray incomingRay, HitRecord hitRecord, out Vector3 attenuation, out Ray scattered)
         {
             var reflectedDirection = Reflect(incomingRay.Direction.Normalize(), hitRecord.Normal);
