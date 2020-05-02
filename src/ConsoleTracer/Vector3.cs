@@ -34,5 +34,18 @@ namespace ConsoleTracer
             );
 
         public Vector3 Normalize() => this / Length;
+
+        private readonly static Random rng = new Random();
+        public static Vector3 RandomUnitVector()
+        {
+            var a = rng.NextDouble(0, 2 * Math.PI);
+            var z = rng.NextDouble(-1, 1);
+            var r = Math.Sqrt(1 - (z * z));
+            return new Vector3(
+                r * Math.Cos(a),
+                r * Math.Sin(a),
+                z
+            );
+        }
     }
 }
