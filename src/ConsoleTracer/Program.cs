@@ -16,8 +16,8 @@ namespace ConsoleTracer
             var cam = new Camera();
             var rng = new Random(1);
             var world = new HittableList(new[]{
-                new Sphere(new Vector3(0,0,-1), 0.5),
-                new Sphere(new Vector3(0,-100.5,-1), 100),
+                new Sphere(new Vector3(0,0,-1), 0.5, new Lambertian(new Vector3(0.5,0.5,0.5))),
+                new Sphere(new Vector3(0,-100.5,-1), 100, new Lambertian(new Vector3(0.5, 0.5, 0.5))),
             });
 
             for (var j = 0; j < img_height; j++)
@@ -49,8 +49,11 @@ namespace ConsoleTracer
 
             if (world.Hit(r, 0.001, double.MaxValue, out var hitRecord))
             {
-                var target = hitRecord.Point + hitRecord.Normal + Vector3.RandomUnitVector();
-                return 0.5 * RayColor(new Ray(hitRecord.Point, target - hitRecord.Point), world, depth - 1);
+                if (hitRecord.Material.Scatter(r, hitRecord, out var attenuation, out var scattered))
+                {
+                    return attenuation * RayColor(scattered, world, depth - 1);
+                }
+                return new Vector3(0, 0, 0);
             }
 
             var unitDirection = r.Direction.Normalize();

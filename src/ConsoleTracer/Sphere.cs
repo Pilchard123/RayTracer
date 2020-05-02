@@ -7,11 +7,13 @@ namespace ConsoleTracer
 
         public Vector3 Center { get; set; }
         public double Radius { get; set; }
+        public IMaterial Material { get; }
 
-        public Sphere(in Vector3 center, double radius)
+        public Sphere(in Vector3 center, double radius, IMaterial material)
         {
             Center = center;
             Radius = radius;
+            Material = material;
         }
 
         public bool Hit(in Ray r, double t_min, double t_max, out HitRecord hitRecord)
@@ -31,7 +33,7 @@ namespace ConsoleTracer
                     var hitPoint = r.PointAtParameter(temp);
                     var outwardNormal = (hitPoint - Center) / Radius;
 
-                    hitRecord = new HitRecord(r.Direction, hitPoint, temp, outwardNormal);
+                    hitRecord = new HitRecord(r.Direction, hitPoint, temp, outwardNormal, Material);
 
                     return true;
                 }
@@ -41,7 +43,7 @@ namespace ConsoleTracer
                     var hitPoint = r.PointAtParameter(temp);
                     var outwardNormal = (hitPoint - Center) / Radius;
 
-                    hitRecord = new HitRecord(r.Direction, hitPoint, temp, outwardNormal);
+                    hitRecord = new HitRecord(r.Direction, hitPoint, temp, outwardNormal, Material);
 
                     return true;
                 }

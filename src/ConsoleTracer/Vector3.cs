@@ -21,6 +21,7 @@ namespace ConsoleTracer
         public static Vector3 operator +(in Vector3 v, in Vector3 other) => new Vector3(v.X + other.X, v.Y + other.Y, v.Z + other.Z);
         public static Vector3 operator *(in Vector3 v, double d) => new Vector3(v.X * d, v.Y * d, v.Z * d);
         public static Vector3 operator *(double d, in Vector3 v) => new Vector3(v.X * d, v.Y * d, v.Z * d);
+        public static Vector3 operator *(in Vector3 v, in Vector3 other) => new Vector3(v.X * other.X, v.Y * other.Y, v.Z * other.Z);
         public static Vector3 operator /(in Vector3 v, double d) => v * (1d / d);
 
         public double LengthSquared => (X * X) + (Y * Y) + (Z * Z);
