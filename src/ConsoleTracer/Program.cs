@@ -8,7 +8,7 @@ namespace ConsoleTracer
 
         const int img_width = 400;
         const int img_height = 200;
-        const int spp = 5;
+        const int spp = 50;
 
         static async Task Main(string[] _)
         {
