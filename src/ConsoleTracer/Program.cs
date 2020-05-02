@@ -49,11 +49,9 @@ namespace ConsoleTracer
 
             if (world.Hit(r, 0.001, double.MaxValue, out var hitRecord))
             {
-                if (hitRecord.Material.Scatter(r, hitRecord, out var attenuation, out var scattered))
-                {
-                    return attenuation * RayColor(scattered, world, depth - 1);
-                }
-                return new Vector3(0, 0, 0);
+                return hitRecord.Material.Scatter(r, hitRecord, out var attenuation, out var scattered)
+                    ? attenuation * RayColor(scattered, world, depth - 1)
+                    : new Vector3(0, 0, 0);
             }
 
             var unitDirection = r.Direction.Normalize();
