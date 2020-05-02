@@ -14,7 +14,7 @@ namespace ConsoleTracer
         {
             var film = new Film(img_height, img_width, spp);
             var cam = new Camera();
-            var rng = new Random();
+            var rng = new Random(1);
             var world = new HittableList(new[]{
                 new Sphere(new Vector3(0,0,-1), 0.5),
                 new Sphere(new Vector3(0,-100.5,-1), 100),

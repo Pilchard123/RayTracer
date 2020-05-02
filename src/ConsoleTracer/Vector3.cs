@@ -35,7 +35,7 @@ namespace ConsoleTracer
 
         public Vector3 Normalize() => this / Length;
 
-        private readonly static Random rng = new Random();
+        private readonly static Random rng = new Random(1);
         public static Vector3 RandomUnitVector()
         {
             var a = rng.NextDouble(0, 2 * Math.PI);
