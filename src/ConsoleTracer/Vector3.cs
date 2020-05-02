@@ -34,10 +34,5 @@ namespace ConsoleTracer
             );
 
         public Vector3 Normalize() => this / Length;
-        public Vector3 AsColour() => new Vector3(
-            (int)(256 * Math.Clamp(Math.Sqrt(X), 0, 0.999)),
-            (int)(256 * Math.Clamp(Math.Sqrt(Y), 0, 0.999)),
-            (int)(256 * Math.Clamp(Math.Sqrt(Z), 0, 0.999))
-        );
     }
 }

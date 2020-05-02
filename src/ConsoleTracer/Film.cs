@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ConsoleTracer
@@ -41,12 +42,18 @@ namespace ConsoleTracer
             {
                 foreach (var pixel in row)
                 {
-                    var scaledPixel = (pixel / SamplesPerPixel).AsColour();
+                    var scaledPixel = GetColourBytes(pixel / SamplesPerPixel);
 
                     await sw.WriteLineAsync($"{scaledPixel.X} {scaledPixel.Y} {scaledPixel.Z}");
                 }
             }
         }
+
+        private Vector3 GetColourBytes(in Vector3 pixel) => new Vector3(
+            (int)(256 * Math.Clamp(Math.Sqrt(pixel.X), 0, 0.999)),
+            (int)(256 * Math.Clamp(Math.Sqrt(pixel.Y), 0, 0.999)),
+            (int)(256 * Math.Clamp(Math.Sqrt(pixel.Z), 0, 0.999))
+        );
 
     }
 }
