@@ -7,9 +7,9 @@ namespace ConsoleTracer
 
         public Vector3 Center { get; set; }
         public double Radius { get; set; }
-        public IMaterial Material { get; }
+        public Material Material { get; }
 
-        public Sphere(in Vector3 center, double radius, IMaterial material)
+        public Sphere(in Vector3 center, double radius, Material material)
         {
             Center = center;
             Radius = radius;

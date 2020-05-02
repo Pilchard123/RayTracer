@@ -6,9 +6,9 @@ namespace ConsoleTracer
     class Program
     {
 
-        const int img_width = 400;
-        const int img_height = 200;
-        const int spp = 50;
+        const int img_width = 800;
+        const int img_height = 400;
+        const int spp = 25;
 
         static async Task Main(string[] _)
         {
@@ -16,8 +16,10 @@ namespace ConsoleTracer
             var cam = new Camera();
             var rng = new Random(1);
             var world = new HittableList(new[]{
-                new Sphere(new Vector3(0,0,-1), 0.5, new Lambertian(new Vector3(0.5,0.5,0.5))),
-                new Sphere(new Vector3(0,-100.5,-1), 100, new Lambertian(new Vector3(0.5, 0.5, 0.5))),
+                new Sphere(new Vector3(0,0,-1), 0.5, new Lambertian(new Vector3(0.7,0.3,0.3))),
+                new Sphere(new Vector3(0,-100.5,-1), 100, new Lambertian(new Vector3(0.8, 0.8, 0))),
+                new Sphere(new Vector3(1,0,-1), 0.5, new Metal(new Vector3(0.8, 0.6, 0.2))),
+                new Sphere(new Vector3(-1,0,-1), 0.5, new Metal(new Vector3(0.8, 0.8, 0.8))),
             });
 
             for (var j = 0; j < img_height; j++)
