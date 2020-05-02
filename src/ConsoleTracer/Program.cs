@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ConsoleTracer.Core;
+using ConsoleTracer.Geometry;
+using ConsoleTracer.Materials;
 
 namespace ConsoleTracer
 {

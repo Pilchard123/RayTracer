@@ -1,6 +1,7 @@
 ﻿using System;
+using ConsoleTracer.Extensions;
 
-namespace ConsoleTracer
+namespace ConsoleTracer.Core
 {
     readonly struct Vector3
     {

@@ -1,4 +1,6 @@
-﻿namespace ConsoleTracer
+﻿using ConsoleTracer.Materials;
+
+namespace ConsoleTracer.Core
 {
     class HitRecord
     {

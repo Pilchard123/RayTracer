@@ -1,4 +1,6 @@
-﻿namespace ConsoleTracer
+﻿using ConsoleTracer.Core;
+
+namespace ConsoleTracer.Materials
 {
     class Metal : Material
     {

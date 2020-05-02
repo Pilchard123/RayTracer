@@ -1,4 +1,4 @@
-﻿namespace ConsoleTracer
+﻿namespace ConsoleTracer.Core
 {
     readonly struct Ray
     {

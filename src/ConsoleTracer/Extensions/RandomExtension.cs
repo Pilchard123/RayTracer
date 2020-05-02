@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleTracer
+namespace ConsoleTracer.Extensions
 {
     static class RandomExtension
     {

@@ -1,6 +1,8 @@
 ﻿using System;
+using ConsoleTracer.Core;
+using ConsoleTracer.Materials;
 
-namespace ConsoleTracer
+namespace ConsoleTracer.Geometry
 {
     class Sphere : IHittable
     {

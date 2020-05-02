@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ConsoleTracer
+namespace ConsoleTracer.Core
 {
     class Film
     {
