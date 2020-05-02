@@ -31,7 +31,7 @@ namespace ConsoleTracer
                         var v = (j + rng.NextDouble()) / img_height;
 
                         var ray = cam.GetRay(u, v);
-                        film.AddSample(i, j, RayColor(ray, world));
+                        film.AddSample(i, j, RayColor(ray, world, 50));
                     }
                 }
             }
@@ -40,11 +40,17 @@ namespace ConsoleTracer
             Console.WriteLine("Done");
         }
 
-        private static Vector3 RayColor(in Ray r, HittableList world)
+        private static Vector3 RayColor(in Ray r, HittableList world, int depth)
         {
-            if (world.Hit(r, 0, double.MaxValue, out var hitRecord))
+            if (depth <= 0)
             {
-                return 0.5 * (hitRecord.Normal + new Vector3(1, 1, 1));
+                return new Vector3(0, 0, 0);
+            }
+
+            if (world.Hit(r, 0.001, double.MaxValue, out var hitRecord))
+            {
+                var target = hitRecord.Point + hitRecord.Normal + Vector3.RandomUnitVector();
+                return 0.5 * RayColor(new Ray(hitRecord.Point, target - hitRecord.Point), world, depth - 1);
             }
 
             var unitDirection = r.Direction.Normalize();
