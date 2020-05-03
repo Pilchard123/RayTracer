@@ -26,7 +26,7 @@ namespace ConsoleTracer.Core
 
         }
 
-        public void AddSample(int x, int y, in Vector3 sample) => _pixelArray[Height - y - 1][Width - x - 1] += sample;
+        public void AddSample(int x, int y, in Vector3 sample) => _pixelArray[Height - y - 1][x] += sample;
 
         public async Task WriteToFile(string filename)
         {
