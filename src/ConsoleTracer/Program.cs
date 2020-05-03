@@ -11,12 +11,12 @@ namespace ConsoleTracer
 
         const int img_width = 800;
         const int img_height = 400;
-        const int spp = 50;
+        const int spp = 5;
 
         static async Task Main(string[] _)
         {
             var film = new Film(img_height, img_width, spp);
-            var cam = new Camera();
+            var cam = new Camera(90, ((double)img_width) / img_height);
             var rng = new Random(1);
             var world = new HittableList(new[]{
                 new Sphere(new Vector3(0,0,-1), 0.5, new Lambertian(new Vector3(0.1,0.2,0.5))),
