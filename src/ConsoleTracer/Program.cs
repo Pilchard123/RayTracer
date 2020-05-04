@@ -11,19 +11,19 @@ namespace ConsoleTracer
 
         const int img_width = 800;
         const int img_height = 400;
-        const int spp = 5;
+        const int spp = 500;
 
         static async Task Main(string[] _)
         {
             var film = new Film(img_height, img_width, spp);
             var cam = new Camera(90, ((double)img_width) / img_height);
             var rng = new Random(1);
+
+            var R = Math.Cos(Math.PI / 4);
+
             var world = new HittableList(new[]{
-                new Sphere(new Vector3(0,0,-1), 0.5, new Lambertian(new Vector3(0.1,0.2,0.5))),
-                new Sphere(new Vector3(0,-100.5,-1), 100, new Lambertian(new Vector3(0.8, 0.8, 0))),
-                new Sphere(new Vector3(1,0,-1), 0.5, new Metal(new Vector3(0.8, 0.6, 0.2), 0.3)),
-                new Sphere(new Vector3(-1,0,-1), 0.5, new Dielectric(1.5)),
-                new Sphere(new Vector3(-1,0,-1), -0.45, new Dielectric(1.5)),
+                new Sphere(new Vector3(-R,0,-1),R, new Lambertian(new Vector3(0,0,1))),
+                new Sphere(new Vector3(R,0,-1),R, new Lambertian(new Vector3(1,0,0))),
             });
 
             for (var j = 0; j < img_height; j++)
