@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConsoleTracer": {
+      "commandName": "Project",
+      "commandLineArgs": "800 400 5 \"C:\\ExperimentalProjects\\FileDrops\\RaytracerOutput\""
+    }
+  }
+}

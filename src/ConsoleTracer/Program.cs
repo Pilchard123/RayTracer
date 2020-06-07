@@ -9,12 +9,14 @@ namespace ConsoleTracer
     class Program
     {
 
-        const int img_width = 800;
-        const int img_height = 400;
-        const int spp = 500;
-
-        static async Task Main(string[] _)
+        static async Task Main(string[] args)
         {
+
+            var img_width = int.Parse(args[0]);
+            var img_height = int.Parse(args[1]);
+            var spp = int.Parse(args[2]);
+            var destination_folder = args[3];
+
             var film = new Film(img_height, img_width, spp);
             var cam = new Camera(90, ((double)img_width) / img_height);
             var rng = new Random(1);
@@ -42,7 +44,7 @@ namespace ConsoleTracer
                 }
             }
             Console.WriteLine("Writing film");
-            await film.WriteToFile($@"C:\ExperimentalProjects\FileDrops\RaytracerOutput\img_{DateTime.UtcNow.Ticks}.ppm");
+            await film.WriteToFile($@"{destination_folder}\img_{DateTime.UtcNow.Ticks}.ppm");
             Console.WriteLine("Done");
         }
 
