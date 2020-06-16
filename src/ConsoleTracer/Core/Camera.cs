@@ -12,17 +12,20 @@ namespace ConsoleTracer.Core
 
 
 
-        public Camera(double vfovDegrees, double aspect)
+        public Camera(Vector3 lookfrom, Vector3 lookat, Vector3 vup, double vfovDegrees, double aspect)
         {
             var vfovRadians = vfovDegrees * Math.PI / 180;
-            var halfHeight = Math.Tan(vfovRadians / 2);
-            var halfWidth = aspect * halfHeight;
+            var viewportHeight = 2 * Math.Tan(vfovRadians / 2);
+            var viewportWidth = aspect * viewportHeight;
 
-            _origin = new Vector3(0, 0, 0);
-            _lowerLeftCorner = new Vector3(-halfWidth, -halfHeight, -1);
-            _horizontal = new Vector3(2 * halfWidth, 0, 0);
-            _vertical = new Vector3(0, 2 * halfHeight, 0);
+            var w = (lookfrom - lookat).Normalize();
+            var u = vup.Cross(w).Normalize();
+            var v = w.Cross(u);
 
+            _origin = lookfrom;
+            _horizontal = viewportWidth * u;
+            _vertical = viewportHeight * v;
+            _lowerLeftCorner = _origin - (_horizontal / 2) - (_vertical / 2) - w;
         }
 
         public Ray GetRay(double u, double v) => new Ray(_origin, _lowerLeftCorner + (u * _horizontal) + (v * _vertical) - _origin);
