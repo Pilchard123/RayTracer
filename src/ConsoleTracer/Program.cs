@@ -28,7 +28,9 @@ namespace ConsoleTracer
                 lookAt,
                 vup,
                 20,
-                ((double)img_width) / img_height
+                ((double)img_width) / img_height,
+                1,
+                (lookFrom - lookAt).Length
             );
 
             var rng = new Random(1);
