@@ -18,8 +18,19 @@ namespace ConsoleTracer
             var destination_folder = args[3];
 
             var film = new Film(img_height, img_width, spp);
-            var cam = new Camera(new Vector3(-2, 2, 1), new Vector3(0, 0, -1), new Vector3(0, 1, 0),
-                20, ((double)img_width) / img_height);
+
+            var lookFrom = new Vector3(3, 3, 2);
+            var lookAt = new Vector3(0, 0, -1);
+            var vup = new Vector3(0, 1, 0);
+
+            var cam = new Camera(
+                lookFrom,
+                lookAt,
+                vup,
+                20,
+                ((double)img_width) / img_height
+            );
+
             var rng = new Random(1);
 
             var world = new HittableList(new[]{

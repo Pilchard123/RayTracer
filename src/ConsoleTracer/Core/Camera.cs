@@ -28,7 +28,7 @@ namespace ConsoleTracer.Core
             _lowerLeftCorner = _origin - (_horizontal / 2) - (_vertical / 2) - w;
         }
 
-        public Ray GetRay(double u, double v) => new Ray(_origin, _lowerLeftCorner + (u * _horizontal) + (v * _vertical) - _origin);
+        public Ray GetRay(double s, double t) => new Ray(_origin, _lowerLeftCorner + (s * _horizontal) + (t * _vertical) - _origin);
 
     }
 }
