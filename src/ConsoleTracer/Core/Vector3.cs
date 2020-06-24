@@ -38,7 +38,7 @@ namespace ConsoleTracer.Core
         public Vector3 Normalize() => this / Length;
 
         private readonly static Random rng = new Random(1);
-        public static Vector3 RandomUnitVector()
+        public static Vector3 Random3DUnitVector()
         {
             var a = rng.NextDouble(0, 2 * Math.PI);
             var z = rng.NextDouble(-1, 1);
@@ -47,6 +47,17 @@ namespace ConsoleTracer.Core
                 r * Math.Cos(a),
                 r * Math.Sin(a),
                 z
+            );
+        }
+
+        public static Vector3 RandomVectorInDisc()
+        {
+            var r = Math.Sqrt(rng.NextDouble());
+            var theta = rng.NextDouble(0, 2 * Math.PI);
+            return new Vector3(
+                r * Math.Cos(theta),
+                r * Math.Sin(theta),
+                0
             );
         }
     }

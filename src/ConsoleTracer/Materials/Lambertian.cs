@@ -7,7 +7,7 @@ namespace ConsoleTracer.Materials
         public Lambertian(in Vector3 albedo) : base(albedo) { }
         public override bool Scatter(in Ray incomingRay, HitRecord hitRecord, out Vector3 attenuation, out Ray scattered)
         {
-            var scatterDirection = hitRecord.Normal + Vector3.RandomUnitVector();
+            var scatterDirection = hitRecord.Normal + Vector3.Random3DUnitVector();
             scattered = new Ray(hitRecord.Point, scatterDirection);
             attenuation = Albedo;
             return true;

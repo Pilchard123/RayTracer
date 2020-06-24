@@ -17,7 +17,7 @@ namespace ConsoleTracer.Materials
         {
             var reflectedDirection = Reflect(incomingRay.Direction.Normalize(), hitRecord.Normal);
 
-            scattered = new Ray(hitRecord.Point, reflectedDirection + (Fuzziness * Vector3.RandomUnitVector()));
+            scattered = new Ray(hitRecord.Point, reflectedDirection + (Fuzziness * Vector3.Random3DUnitVector()));
             attenuation = Albedo;
             return reflectedDirection.Dot(hitRecord.Normal) > 0;
         }
